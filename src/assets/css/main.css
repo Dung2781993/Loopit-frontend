@@ -3,7 +3,6 @@
   }
   
   body {
-    background: #070fff6e !important;
     min-height: 100vh;
     display: flex;
     font-weight: 400;
@@ -123,4 +122,8 @@
   .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
+  }
+
+  .required-field {
+    color: red;
   }
