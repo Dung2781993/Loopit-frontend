@@ -127,3 +127,7 @@
   .required-field {
     color: red;
   }
+
+  .icon-auth {
+    margin-right: 10px;
+  }

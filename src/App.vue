@@ -13,16 +13,20 @@
           Loopit
         </a>
         <ul class="nav navbar-nav flex-row float-right">
-          <li class="nav-item" v-if="!isLogged">
-            <router-link class="nav-link pr-3" to="/login">Sign in</router-link>
+          <li class="nav-item" v-if="!currentUser">
+            <router-link to="/" class="nav-link">
+              <font-awesome-icon class="icon-auth" icon="sign-in-alt" />Login
+            </router-link>
           </li>
-          <li class="nav-item" v-if="!isLogged">
-            <router-link class="btn btn-outline-primary" to="/"
-              >Sign up</router-link
-            >
+          <li class="nav-item" v-if="!currentUser">
+            <router-link class="btn btn-outline-primary" to="/signup">
+              <font-awesome-icon class="icon-auth" icon="user-plus" />Sign Up
+            </router-link>
           </li>
-          <li class="nav-item" v-if="isLogged">
-            <a href="#" @click.prevent="logout">Logout</a>
+          <li class="nav-item" v-if="currentUser">
+            <a class="nav-link" href @click.prevent="logOut">
+              <font-awesome-icon icon="sign-out-alt" />LogOut
+            </a>
           </li>
         </ul>
       </div>
@@ -38,22 +42,15 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      isLogged: this.checkIfIsLogged(),
-    };
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
   },
   methods: {
-    logout() {
-      
-    },
-    checkIfIsLogged() {
-      let token = localStorage.getItem("token");
-      if (token) {
-        return true;
-      } else {
-        return false;
-      }
+    logOut() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/login");
     },
   },
 };
