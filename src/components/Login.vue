@@ -96,12 +96,13 @@ export default {
       if (this.formValidation()) {
         this.loading = true;
         let response = await this.$store.dispatch("auth/login", this.user);
+        console.log(response);
         if (response) {
           this.$message({
             message: "Congrats, login successfully",
             type: "success",
           });
-          this.$router.push({ name: "profile" });
+          this.$router.push({ name: "car" });
         } else {
           this.loading = false;
           this.$message.error(

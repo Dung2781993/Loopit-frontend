@@ -18,7 +18,11 @@
                 <font-awesome-icon class="icon-auth" icon="user-plus" />Sign Up
               </router-link>
             </li>
-
+            <li class="nav-item" v-if="currentUser">
+              <router-link to="/car" class="nav-link">
+                Car
+              </router-link>
+            </li>
             <li class="nav-item" v-if="currentUser">
               <router-link to="/profile" class="nav-link">
                 <font-awesome-icon class="icon-auth" icon="user" />
