@@ -42,7 +42,10 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block btn-submit" :disabled="loading">
+          <button
+            class="btn btn-primary btn-block btn-submit"
+            :disabled="loading"
+          >
             <span
               v-show="loading"
               class="spinner-border spinner-border-sm"
@@ -85,33 +88,40 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push({ name: "profile" });
     }
   },
   methods: {
     async handleLogin() {
-      this.loading = true;
-      console.log('Hellomama');
-      let response = await this.$store.dispatch('auth/login', this.user);
-      console.log(response);
-      // if (this.formValidation()) {
-      //   let formData = new FormData();
-      //   formData.append("email", this.form.email);
-      //   formData.append("password", this.form.password);
-      //   let response = await AccountService.login(formData);
-      //   if (response && response.data) {
-      //     this.$message({
-      //       message: "Congrats, login successfully",
-      //       type: "success",
-      //     });
-      //     localStorage.setItem("token", response.data.access_token);
-      //     this.$router.push({ name: "dashboard" });
-      //   } else {
-      //     this.$message.error(
-      //       "The credentials that you've entered are incorrect."
-      //     );
-      //   }
-      // }
+      if (this.formValidation()) {
+        this.loading = true;
+        let response = await this.$store.dispatch("auth/login", this.user);
+        if (response) {
+          this.$message({
+            message: "Congrats, login successfully",
+            type: "success",
+          });
+          this.$router.push({ name: "profile" });
+        } else {
+          this.loading = false;
+          this.$message.error(
+            "The credentials that you've entered are incorrect."
+          );
+        }
+      }
+    },
+    formValidation() {
+      if (this.user.email == "") {
+        this.validation.isEmail = true;
+        return false;
+      }
+      if (this.user.password == "") {
+        this.validation.isPassword = true;
+        return false;
+      }
+      this.validation.isEmail = false;
+      this.validation.isPassword = false;
+      return true;
     },
   },
 };
