@@ -12,9 +12,12 @@ class AuthService {
       .then((response) => {
         if (response.data) {
           localStorage.setItem("user", JSON.stringify(response.data));
+          return response.data;
         }
-
-        return response.data;
+        return null;
+      })
+      .catch((error) => {
+        console.log('error login account ', error);
       });
   }
 
@@ -23,10 +26,14 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + "signup", {
-      email: user.email,
-      password: user.password,
-    });
+    return axios
+      .post(API_URL + "signup", {
+        email: user.email,
+        password: user.password,
+      })
+      .catch((error) => {
+        console.log('error register account', error);
+      });
   }
 }
 
