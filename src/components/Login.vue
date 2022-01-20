@@ -102,7 +102,7 @@ export default {
             message: "Congrats, login successfully",
             type: "success",
           });
-          this.$router.push({ name: "profile" });
+          this.$router.push({ name: "car" });
         } else {
           this.loading = false;
           this.$message.error(

@@ -11,10 +11,10 @@ class AuthService {
       })
       .then((response) => {
         if (response.data) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          return response.data;
+          localStorage.setItem("token", JSON.stringify(response.data.access_token)); 
+          localStorage.setItem("user", JSON.stringify(response.data)); 
         }
-        return null;
+        return response.data;
       })
       .catch((error) => {
         console.log('error login account ', error);
@@ -23,6 +23,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
 
   register(user) {

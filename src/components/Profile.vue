@@ -17,7 +17,7 @@ export default {
   name: "Profile",
   computed: {
     currentUser() {
-      return this.$store.state.auth.user || this.$store.state.auth.token.user;
+      return this.$store.state.auth.user;
     },
   },
   mounted() {
