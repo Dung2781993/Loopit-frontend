@@ -44,7 +44,8 @@ const routes = [
   {
     path: "/car",
     name: "car",
-    component: Car
+    component: Car,
+    meta: { requiresAuth: true }
   },
 ];
 
