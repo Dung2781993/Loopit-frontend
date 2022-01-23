@@ -19,9 +19,7 @@
               </router-link>
             </li>
             <li class="nav-item" v-if="currentUser">
-              <router-link to="/car" class="nav-link">
-                Car
-              </router-link>
+              <router-link to="/car" class="nav-link"> Car </router-link>
             </li>
             <li class="nav-item" v-if="currentUser">
               <router-link to="/profile" class="nav-link">
@@ -31,7 +29,10 @@
             </li>
             <li class="nav-item" v-if="currentUser">
               <a class="nav-link" href @click.prevent="logOut">
-                <font-awesome-icon class="icon-auth" icon="sign-out-alt" />LogOut
+                <font-awesome-icon
+                  class="icon-auth"
+                  icon="sign-out-alt"
+                />LogOut
               </a>
             </li>
           </ul>
@@ -56,6 +57,7 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch("auth/logout");
+      this.$router.go();
       this.$router.push("/login");
     },
   },
